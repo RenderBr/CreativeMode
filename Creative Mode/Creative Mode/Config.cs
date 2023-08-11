@@ -1,22 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using Newtonsoft.Json;
 using TShockAPI;
 
 namespace CreativeMode
 {
     class Config
     {
-        private static string savepath = TShock.SavePath;
+        private readonly static string SavePath = TShock.SavePath;
         public static Contents contents;
 
         public class Contents
         {
             public bool EnableWhitelist = false;
-            public List<int> WhitelistItems = new List<int>()
+            public List<int> WhitelistItems = new()
             #region WhiteListItems
                 {
                     2, //Dirt block
@@ -47,7 +45,7 @@ namespace CreativeMode
             #endregion
 
             public bool EnableBlacklist = false;
-            public List<int> BlacklistItems = new List<int>()
+            public List<int> BlacklistItems = new()
             #region BlacklistItems           
             {
                     11, //Iron ore
@@ -74,8 +72,8 @@ namespace CreativeMode
 
         public static void CreateConfig()
         {
-            string filepath = Path.Combine(savepath, "CreativeModeConfig.json");
-            
+            string filepath = Path.Combine(SavePath, "CreativeModeConfig.json");
+
             try
             {
                 using (var stream = new FileStream(filepath, FileMode.Create, FileAccess.Write, FileShare.Write))
@@ -98,7 +96,7 @@ namespace CreativeMode
 
         public static bool ReadConfig()
         {
-            string filepath = Path.Combine(savepath, "CreativeModeConfig.json");
+            string filepath = Path.Combine(SavePath, "CreativeModeConfig.json");
 
             try
             {
@@ -131,7 +129,7 @@ namespace CreativeMode
 
         public static bool UpdateConfig()
         {
-            string filepath = Path.Combine(savepath, "CreativeModeConfig.json");
+            string filepath = Path.Combine(SavePath, "CreativeModeConfig.json");
 
             try
             {
